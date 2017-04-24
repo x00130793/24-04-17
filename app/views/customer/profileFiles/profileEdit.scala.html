@@ -1,4 +1,4 @@
-@(customer: models.users.Customer, user: models.users.User, categories: List[models.Category], editProfileForm: Form[models.users.User], catId: Long, filter: String)
+@(customer: models.users.Customer, user: models.users.User, categories: List[models.Category], c1: Form[models.Factory], catId: Long, filter: String)
 @import helper._
 
 @main("Edit profile", user, categories, catId, filter)  {
@@ -7,23 +7,62 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-9 padding-right">
+				@if(flash.containsKey("success")){
+							<div class="alert alert-success">
+							@flash.get("success")
+							</div>
+						}
+						@if(flash.containsKey("fail")){
+							<div class="alert alert-danger">
+							@flash.get("fail")
+							</div>
+						}
 				
 				
 				<h2 class="title text-center">Edit profile</h2>
 				<div id="accordian">
 					<div class="list-group">
 
-							@helper.form(action = controllers.routes.LoginController.editProfileForm(user.getEmail(), catId, filter), 'enctype -> "multipart/form-data") {
+							@helper.form(action = controllers.routes.CustomerCtrl.profileSubmit(catId, filter), 'enctype -> "multipart/form-data") {
 								
-								<div class="well">
-								@inputText(editProfileForm("fName"), 'class -> "form-control")
-								</div>
+								
+							@inputText(c1("strFormat1"), '_label -> "Street 1", 'class -> "form-control")				
+						</div>
+
+						<div class="form-group col-sm-12">
+							@inputText(c1("strFormat2"),  '_label -> "Street 2", 'class -> "form-control")	
+						</div>
+
+						<div class="form-group col-sm-12">
+							@inputText(c1("strFormat3"), '_label -> "Town", 'class -> "form-control")	
+						</div>
+
+						<div class="form-group col-sm-12">
+							@inputText(c1("strFormat4"), '_label -> "Post code", 'class -> "form-control")	
+						</div>
+
+						<div class="form-group col-sm-12">
+							@select(
+							c1("strFormat5"),
+							options(Seq("United Kingdom", "Ireland", "France", "Spain", "Germany", "Netherlands",
+										"Belgium", "Portugal", "Belgium", "Poland", "Czech Republic", "Latvia", 
+										"Lithuania", "Norway", "Sweden", "Denmark")),
+							'_label -> "Country", 
+							'_default -> "-- Select Country --"
+							)
+	
+						</div>
+
+						<div class="actions">
+								<input type="submit" value="Update Profile" class="btn btn-success btn-sm" align="right">
+								<a href="@routes.CustomerCtrl.profile()">
+								</a>
+							</div> 
 							}
 								
 					</div>
 				</div>
-				<div>
-				</div>
+			</div>
 			</div>
 
 

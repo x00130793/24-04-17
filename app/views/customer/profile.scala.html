@@ -19,14 +19,37 @@
 						}
 					<h2 class="title text-center">Profile</h2>
 					<div id="accordian">
+						<strong><p>User Name: </strong> @user.getfName </p>
+						<strong><p>User Surname: </strong> @user.getlName </p>
+						<strong><p>Role: </strong> @user.getRole </p>
+						<strong><p>Street 1: </strong> @customer.getStreet1 </p>
+						<strong><p>Street 2: </strong> @customer.getStreet2 </p>
+						<strong><p>Town: </strong> @customer.getTown </p>
+						<strong><p>Post Code: </strong> @customer.getPostCode </p>
+						<strong><p>Country: </strong> @customer.getCountry </p>
+						
 							<div class="list-group">
 
-								<h4 class="panel-title">
+								<h4 class="btn btn-sm">
 									<a href="@routes.CustomerCtrl.orderHistory(catId, filter)" class="list-group-item">Order history</a>
+									
+								</h4>
+								
+								<h4 class="btn btn-sm">
 									<a href="@routes.CustomerCtrl.profileEdit(catId, filter)" class="list-group-item">Edit profile</a>
+									
 								</h4>
 
+							
+
 							</div>
+
+						<div class="row">
+
+            					
+
+
+        					</div>
 					</div>
 				<div>
 			</div>

@@ -1,0 +1,35 @@
+@import models.productsAdditions.ProductWarehouse
+@import models.users.Warehouse
+@import helper._
+
+@(user: models.users.User, id: Long, wList: List[Warehouse], tmp: List[String], c1: Form[models.Factory])
+@warehousePages.warehouseMain("Supply warehouse", user) {
+
+<!--====================== J.T. =====================-->
+	<h3>Supply other warehouse with product </h3>
+	
+
+	@form(action = routes.WarehouseController.supplyWarehouseSubmit(id), 'class -> "form-horizontal", 'role->"form", 'enctype -> "multipart/form-data") {
+		
+		@select(
+			c1("strFormat1"),
+			options = options(tmp),
+			'_label -> "Choose warehouse",
+			'_showConstraints -> false
+		)
+
+		@inputText(c1("intFormat"), '_label -> "Amount of stock to assign to this warehouse",'class -> "form-control")
+
+
+
+	<!-- Add a submit button -->
+  <div class="actions">
+      <input href="@routes.WarehouseController.products(0)" type="submit" value="Supply warehouse" class="btn btn-primary">
+			<a href="@routes.WarehouseController.products(0)"
+				<button class="btn btn-primary">Cancel</button>
+			</a>
+  </div>
+	} <!-- End Form definition -->
+
+} <!-- End of page content -->
+

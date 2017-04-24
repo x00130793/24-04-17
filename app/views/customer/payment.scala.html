@@ -1,0 +1,147 @@
+@(Customer: models.users.Customer, user: models.users.User, categories: List[models.Category], catId: Long, filter: String, c1: Form[models.Factory])
+
+@import helper._
+
+
+@main("Payment", user, categories, catId, filter)  {
+<!--====================== A.S. =====================-->
+	@form(action = routes.ShoppingCtrl.paymentSubmit(catId, filter), 'class -> "form-horizontal", 'role -> "form") {
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-9">
+				@if(flash.containsKey("success")){
+							<div class="alert alert-success">
+							@flash.get("success")
+							</div>
+						}
+						@if(flash.containsKey("fail")){
+							<div class="alert alert-danger">
+							@flash.get("fail")
+							</div>
+						}
+				<h2 class="title text-center">Payment</h2>
+				<div id="accordian">
+					<div class="col-sm-6">
+
+					
+						<div class="form-group col-sm-12">
+						<h2 class="title text-center">Card details</h2>
+							<label for="usr">Card Number:</label>
+							<input type="text" class="form-control" id="usr">
+						</div>
+					
+
+				
+						<div class="form-group col-sm-12">
+							<label for="usr">Expiration Date:</label>
+							<select class="form-control" id="sel1">
+   							<option>1</option>
+   							<option>2</option>
+   							<option>3</option>
+  							<option>4</option>
+   							<option>5</option>
+   							<option>6</option>
+   							<option>7</option>
+  							<option>8</option>
+   							<option>9</option>
+   							<option>10</option>
+   							<option>11</option>
+  							<option>12</option>
+ 						</select>
+						</div>
+
+						<div class="form-group col-sm-12">
+						<select class="form-control " id="sel1">
+   							<option>2017</option>
+   							<option>2018</option>
+   							<option>2019</option>
+  							<option>2020</option>
+   							<option>2021</option>
+   							
+ 						</select>
+						</div>
+						
+										
+									
+
+					
+						<div class="form-group col-sm-12">
+							<label for="usr">First Name:</label>
+							<input type="text" value=@user.getfName() class="form-control" id="usr">
+						</div>
+								
+						<div class="form-group col-sm-12">
+							<label for="usr">Last Name:</label>
+							<input type="text" value=@user.getlName() class="form-control" id="usr">
+						</div>
+
+						<div class="form-group col-sm-12">
+							<label for="usr">Security Code:</label>
+							<input type="text" class="form-control" id="usr">
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<!---->
+							
+						
+						<!---->
+
+						<div class="form-group col-sm-12">
+						<h2 class="title text-center">Address</h2>
+							@inputText(c1("strFormat1"), '_label -> "Street 1", 'class -> "form-control")				
+						</div>
+
+						<div class="form-group col-sm-12">
+							@inputText(c1("strFormat2"),  '_label -> "Street 2", 'class -> "form-control")	
+						</div>
+
+						<div class="form-group col-sm-12">
+							@inputText(c1("strFormat3"), '_label -> "Town", 'class -> "form-control")	
+						</div>
+
+						<div class="form-group col-sm-12">
+							@inputText(c1("strFormat4"), '_label -> "Post code", 'class -> "form-control")	
+						</div>
+
+						<div class="form-group col-sm-12">
+							@select(
+							c1("strFormat5"),
+							options(Seq("United Kingdom", "Ireland", "France", "Spain", "Germany", "Netherlands",
+										"Belgium", "Portugal", "Belgium", "Poland", "Czech Republic", "Latvia", 
+										"Lithuania", "Norway", "Sweden", "Denmark")),
+							'_label -> "Country", 
+							'_default -> "-- Select Country --"
+							)
+	
+						</div>
+						
+						
+						<div class="form-group col-sm-12">
+							<!--<p class="text-left">
+										<a type="submit" href="@routes.ShoppingCtrl.placeOrder()" class="btn btn-success btn-sm">
+										<span class="glyphicon glyphicon-euro"></span> Place Order</a>
+							</p>	 -->
+							<div class="actions">
+								<input type="submit" value="Place Order" class="btn btn-success btn-sm" align="right">
+								<a href="@routes.ShoppingCtrl.placeOrder()">
+								</a>
+							</div>  
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+						
+						
+
+		
+
+	}
+}
+<!-- Create file payment, change routes -->

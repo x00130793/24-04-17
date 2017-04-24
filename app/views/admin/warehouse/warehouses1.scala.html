@@ -1,0 +1,98 @@
+@import models.users.Warehouse
+@import models.users.User
+
+@(wList: List[Warehouse], user: User)
+
+<!-- Pass page title and content {html between braces} to the main view -->
+@admin.adminMain("Warehouses", user) {
+  <!-- HTML content for the index view -->
+  <div class="row">
+      <div class="col-sm-2">
+          
+      </div>
+      <div class="col-sm-8">
+          <h2 class="title text-center">Warehouses</h2>
+          @if(flash.containsKey("success")) {
+              <div class="alert alert-success">
+              @flash.get("success")
+              </div>
+          }
+          @if(flash.containsKey("fail")){
+							<div class="alert alert-danger">
+							@flash.get("fail")
+							</div>
+		  }
+          <table class="table table-bordered table-hover table-condensed">
+              <!--Headers-->
+          <thead>
+
+          <tr>
+            <th>Status</th>
+            <th>Country</th>
+            <th>Email</th>
+            <th>Update</th>
+            <th>Delete</th>
+            <th>Set as main</th>
+          </tr>
+          </thead>
+          <tbody>
+              <!--/Headers-->
+              <!--List of warehouses-->
+          @for(w <- wList) {
+              <tr>
+                  @if(w.isMain() == false){
+                      <td>
+                          Warehouse
+                      </td>
+                  }  else {
+                     <td> 
+                         *Main warehouse
+                     </td>    
+                  }
+                  
+                  <td>@w.getCountry</td>
+                  <td>@w.getEmail</td>
+
+                  <td>
+                      <a href="@routes.AdminController.updateWarehouse(w.getEmail)" class="btn-xs btn-danger">
+                      <span class="glyphicon glyphicon-pencil"></span></a>
+                  </td>
+                  <!--Delete product button -->
+                  @if(w.isMain() == false){
+                  <td>
+                      <a href="@routes.AdminController.delWarehouse(w.getEmail)" class="btn-xs btn-danger"
+                        onclick="return confirmDel();">
+                        <span class="glyphicon glyphicon-trash"></span>
+                      </a>
+                  </td>
+                  <td>
+                      <a href="@routes.AdminController.setAsMain(w.getEmail)" class="btn-xs btn-danger"
+                        onclick="return confirmSetMain();">
+                        <span class="glyphicon glyphicon-star"></span>
+                      </a>
+                  </td>
+                  }
+              </tr>
+					} <!-- END of the list -->
+          </tbody>
+        </table>
+        <p>
+          <a href="@routes.AdminController.addWarehouse()">
+            <button class="btn btn-primary">Add warehouse</button>
+          </a>
+        </p>
+      </div>
+  </div>
+
+  <script>
+    // JavaScript function returns true if user clicks yes, otherwise, false
+    function confirmDel() {
+        return confirm('Are you sure you want to delete this warehouse?');
+    }
+    function confirmSetMain() {
+        return confirm('Are you sure you want to change status of this warehouse?');
+    }
+  </script>
+
+  <!-- End of content for main -->
+}

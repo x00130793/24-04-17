@@ -1,0 +1,8 @@
+[0m[[0mdebug[0m] [0mCopy resource mappings: [0m
+[0m[[0mdebug[0m] [0m	(/home/wdd/Desktop/project2/project2017/conf/evolutions,/home/wdd/Desktop/project2/project2017/target/scala-2.11/classes/evolutions)[0m
+[0m[[0mdebug[0m] [0m	(/home/wdd/Desktop/project2/project2017/conf/application.conf,/home/wdd/Desktop/project2/project2017/target/scala-2.11/classes/application.conf)[0m
+[0m[[0mdebug[0m] [0m	(/home/wdd/Desktop/project2/project2017/conf/routes,/home/wdd/Desktop/project2/project2017/target/scala-2.11/classes/routes)[0m
+[0m[[0mdebug[0m] [0m	(/home/wdd/Desktop/project2/project2017/conf/logback.xml,/home/wdd/Desktop/project2/project2017/target/scala-2.11/classes/logback.xml)[0m
+[0m[[0mdebug[0m] [0m	(/home/wdd/Desktop/project2/project2017/conf/evolutions/default,/home/wdd/Desktop/project2/project2017/target/scala-2.11/classes/evolutions/default)[0m
+[0m[[0mdebug[0m] [0m	(/home/wdd/Desktop/project2/project2017/conf/evolutions/default/2.sql,/home/wdd/Desktop/project2/project2017/target/scala-2.11/classes/evolutions/default/2.sql)[0m
+[0m[[0mdebug[0m] [0m	(/home/wdd/Desktop/project2/project2017/conf/evolutions/default/1.sql,/home/wdd/Desktop/project2/project2017/target/scala-2.11/classes/evolutions/default/1.sql)[0m

@@ -1,0 +1,96 @@
+@import models.IndexSlider
+@import models.users.User
+
+@(env: play.api.Environment, user: User, iList: List[IndexSlider], activeI: IndexSlider)
+
+
+@admin.adminMain("Index Sliders", user) {
+<!--====================== J.T. =====================-->
+
+    <div class="row">
+			<div class="col-sm-2"></div>
+        <div class="col-sm-8">
+					<h2 class="title text-center">Index Sliders</h2>
+
+            @if(flash.containsKey("success")){
+							<div class="alert alert-success">
+							@flash.get("success")
+							</div>
+						}
+						@if(flash.containsKey("fail")){
+							<div class="alert alert-danger">
+							@flash.get("fail")
+							</div>
+						}
+          
+	<section id="slider"><!--slider-->
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-9">
+					<div id="slider-carousel" class="carousel slide" data-ride="carousel">
+
+
+						<div class="carousel-inner" style="height: 245px;">
+							<div class="item active">
+								<div class="col-sm-6">
+									<h1><span>@activeI.getHeading</span></h1>
+									<h2>@activeI.getHeading2</h2>
+									<p>@activeI.getContent</p>
+									<a href="@routes.AdminController.updateIndexSlider(activeI.getId)" <button type="button" class="btn btn-info">Update</button></a>
+									<a href="@routes.AdminController.deleteIndexSlider(activeI.getId)" <button type="button" class="btn btn-danger">Delete</button></a>
+								</div>
+								<div class="col-sm-6">
+									<img src="/assets/images/slider/@(activeI.getId).jpg" class="girl img-responsive" alt="" />
+
+							</div>
+							</div>
+							@for(i <- iList){
+							
+								<div class="pushDown item">
+									<div class="col-sm-6">
+										<h1><span>@activeI.getHeading</span></h1>
+										<h2>@i.getHeading2</h2>
+										<p>@i.getContent</p>
+										<a href="@routes.AdminController.updateIndexSlider(i.getId)" <button type="button" class="btn btn-info">Update</button></a>
+									  <a href="@routes.AdminController.deleteIndexSlider(i.getId)" <button type="button" class="btn btn-danger">Delete</button></a>
+									</div>
+									<div class="col-sm-6">
+										<img src="/assets/images/slider/@(i.getId).jpg" class="girl img-responsive" alt="" />
+										
+										<!--<img src="/assets/images/home/new.png"  class="pricing" alt="" />-->
+									</div>
+								</div>
+							}
+
+						</div>
+
+						<a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+							<i class="fa fa-angle-left"></i>
+						</a>
+						<a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+							<i class="fa fa-angle-right"></i>
+						</a>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section><!--/slider-->
+			<div class="actions text-center">
+			<a href="@routes.AdminController.addIndexSlider()"
+				<button class="btn btn-success">Add slider</button>
+			</a>
+			</div>
+			
+        </div>
+    </div>
+
+  <script>
+    // JavaScript function returns true if user clicks yes, otherwise, false
+    function confirmDel() {
+        return confirm('Are you sure?');
+    }
+  </script>
+
+  <!-- End of content for main -->
+}

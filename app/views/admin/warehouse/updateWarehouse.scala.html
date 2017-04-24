@@ -1,0 +1,51 @@
+@(email: String, wForm: play.data.Form[models.users.Warehouse], user: models.users.User)
+@import helper._
+
+
+<!-- Pass page title and content {html between braces} to the main view -->
+@admin.adminMain("Update Warehouse", user) {
+    <h3>Update Warehouse</h3>
+    @if(flash.containsKey("success")){
+							<div class="alert alert-success">
+							@flash.get("success")
+							</div>
+						}
+						@if(flash.containsKey("fail")){
+							<div class="alert alert-danger">
+							@flash.get("fail")
+							</div>
+						}
+
+
+	<!-- Use the views.html.helpers package to create the form -->
+	@form(action = routes.AdminController.updateWarehouseSubmit(email), 'class -> "form-horizontal", 'role->"form") {
+		
+		@inputText(wForm("fName"), '_label -> "Fisrt Name",'class -> "form-control ")
+		@inputText(wForm("lName"), '_label -> "Second Name",'class -> "form-control")
+		@inputText(wForm("email"), '_label -> "E-mail",'class -> "form-control")
+		@inputText(wForm("password"), '_label -> "Password",'class -> "form-control", 'type -> "password")
+		@inputText(wForm("password2"), '_label -> "Repeat Password",'class -> "form-control", 'type -> "password")
+							
+		@inputText(wForm("street1"), '_label -> "Street 1",'class -> "form-control")
+		@inputText(wForm("street2"), '_label -> "street 2",'class -> "form-control")
+		@inputText(wForm("town"), '_label -> "Town",'class -> "form-control")
+		@select(
+		wForm("country"),
+		options(Seq("United Kingdom", "Ireland", "France", "Spain", "Germany", "Netherlands",
+					"Belgium", "Portugal", "Belgium", "Poland", "Czech Republic", "Latvia", 
+					"Lithuania", "Norway", "Sweden", "Denmark")),
+					'_label -> "Country", 
+					'_default -> "-- Select Country --"
+					)	
+
+				
+	<!-- Add a submit button -->
+  <div class="actions">
+      <input href="@routes.AdminController.warehouses1()" type="submit" value="Update warehouse" class="btn btn-primary">
+			<a href="@routes.AdminController.warehouses1()"
+				<button class="btn btn-primary">Cancel</button>
+			</a>
+  </div>
+	} <!-- End Form definition -->
+
+} <!-- End of page content -->

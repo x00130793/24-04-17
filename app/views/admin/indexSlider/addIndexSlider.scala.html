@@ -1,0 +1,44 @@
+@import models.IndexSlider
+@import helper._
+@(user: models.users.User, sliderForm: play.data.Form[IndexSlider])
+
+
+
+@admin.adminMain("Add slider in index", user) {
+<!--====================== J.T. =====================-->
+	<h3>Add Slider in index page</h3>
+	@if(flash.containsKey("success")){
+							<div class="alert alert-success">
+							@flash.get("success")
+							</div>
+						}
+						@if(flash.containsKey("fail")){
+							<div class="alert alert-danger">
+							@flash.get("fail")
+							</div>
+						}
+
+	@form(action = routes.AdminController.addIndexSliderSubmit(), 'class -> "form-horizontal", 'role->"form", 'enctype -> "multipart/form-data") {
+		
+
+		@inputText(sliderForm("heading"), '_label -> "Heading 1",'class -> "form-control")
+		@inputText(sliderForm("heading2"), '_label -> "Heading 2",'class -> "form-control")
+		@inputText(sliderForm("content"), '_label -> "Content",'class -> "form-control")
+	  @inputText(sliderForm("postLink"), '_label -> "Post link",'class -> "form-control")
+		<!-- Image upload input -->
+		<label>Image</label>
+    <input class="btn btn-default get" type="file" name="upload">
+	
+		<br><br>
+
+	<!-- Add a submit button -->
+  <div class="actions">
+      <input type="submit" value="Add slider" class="btn btn-default get">
+			<a href="@routes.AdminController.addIndexSlider()"
+				<button class="btn btn-default get">Cancel</button>
+			</a>
+  </div>
+	} <!-- End Form definition -->
+
+} <!-- End of page content -->
+

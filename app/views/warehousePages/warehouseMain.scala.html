@@ -1,0 +1,86 @@
+@import controllers.LoginController
+@import controllers.security
+@(title: String, user: models.users.User)(content: Html)
+<!--====================== J.T. =====================-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        @* Here's where we render the page title `String`. *@
+        <title>@title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+           <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")" rel="stylesheet">
+   <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/animate.css")" rel="stylesheet">
+   <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")"  rel="stylesheet">
+   <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/font-awesome.min.css")" rel="stylesheet">
+   <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/prettyPhoto.css")" rel="stylesheet">
+   <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/price-range.css")" rel="stylesheet">
+   <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/responsive.css")" rel="stylesheet">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+        <script src="@routes.Assets.versioned("javascripts/hello.js")" type="text/javascript"></script>
+   <script src="@routes.Assets.versioned("javascripts/bootstrap.min.js")" type="text/javascript"></script>
+   <script src="@routes.Assets.versioned("javascripts/contact.js")" type="text/javascript"></script>
+   <script src="@routes.Assets.versioned("javascripts/gmaps.js")" type="text/javascript"></script>
+   <script src="@routes.Assets.versioned("javascripts/hello.js")" type="text/javascript"></script>
+   <script src="@routes.Assets.versioned("javascripts/html5shiv.js")" type="text/javascript"></script>
+   <script src="@routes.Assets.versioned("javascripts/jquery.js")" type="text/javascript"></script>
+   <script src="@routes.Assets.versioned("javascripts/jquery.prettyPhoto.js")" type="text/javascript"></script>
+   <script src="@routes.Assets.versioned("javascripts/jquery.scrollUp.min.js")" type="text/javascript"></script>
+   <script src="@routes.Assets.versioned("javascripts/price-range.js")" type="text/javascript"></script>
+   <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link  sizes="114x114" href="@routes.Assets.versioned("images/ico/apple-touch-icon-114-precomposed.png") rel="apple-touch-icon-precomposed">
+    <link  sizes="72x72" href="@routes.Assets.versioned("images/ico/apple-touch-icon-72-precomposed.png") rel="apple-touch-icon-precomposed">
+    <link  href="@routes.Assets.versioned("images/ico/apple-touch-icon-57-precomposed.png") rel="apple-touch-icon-precomposed">
+    </head>
+    <body>
+    <!-- start of nav section -->
+    <nav class="navbar navbar-inverse">
+            <!-- nav header/ branding -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="">Warehouse</a>
+            </div>
+            <!-- List containing nav links -->
+            <ul class="nav navbar-nav">
+
+                <li @if(title == "Orders"){class="active"}>
+                    <a href="@routes.WarehouseController.ordersW()">Orders</a>
+                </li>
+                <li @if(title == "Products"){class="active"}>
+                    <a href="@routes.WarehouseController.products()">Products</a>
+                </li>
+                
+                <!-- Login/ Logout  Link - Check if user logged in-->
+                <li @if(title == "Login"){class="active"}>
+                    @if(user != null) {
+                        <a href="@controllers.routes.LoginController.logout()">Logout @user.getfName()</a>
+                    } else {
+                        <a href="@controllers.routes.LoginController.login()">Login</a>
+                    }
+                </li>
+            </ul>
+    </nav>
+    
+    <div class="container-fluid">
+        @* And here's where we render the `Html` object containing
+         * the page content. *@
+        @content
+    </div>
+    <footer class="container-fluid">
+         <p></p>
+     </footer>
+
+    </body>
+    <!-- Load JavaScript libs last -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="@routes.Assets.versioned("javascripts/hello.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.versioned("javascripts/jquery.js")" type="text/javascript"></script>
+   <script src="@routes.Assets.versioned("javascripts/bootstrap.min.js")" type="text/javascript"></script>
+   <script src="@routes.Assets.versioned("javascripts/jquery.scrollUp.min.js")" type="text/javascript"></script>
+   <script src="@routes.Assets.versioned("javascripts/price-range.js")" type="text/javascript"></script>
+   <script src="@routes.Assets.versioned("javascripts/jquery.prettyPhoto.js")" type="text/javascript"></script>
+   <script src="@routes.Assets.versioned("javascripts/main.js")" type="text/javascript"></script>
+</html>
+

@@ -1,0 +1,102 @@
+@import helper._
+@(categories: List[models.Category], user: models.users.User, catId: Long, filter: String, prod: models.Product, cList: List[models.productsAdditions.Comment], commentForm: Form[productsAdditions.Comment])
+@main("productDetails", user,  categories, catId, filter) {
+				<div class="col-sm-12 padding-right">
+					@if(flash.containsKey("success")){
+							<div class="alert alert-success">
+							@flash.get("success")
+							</div>
+						}
+						@if(flash.containsKey("fail")){
+							<div class="alert alert-danger">
+							@flash.get("fail")
+							</div>
+						}
+<!--====================== A.S. =====================-->						
+					<div class="product-details"><!--product-details-->
+						<div class="col-sm-5">
+							<div class="view-product">
+								<img src="/assets/images/productImages/@(prod.getId).jpg" alt="" />
+								
+							</div>
+							<div id="similar-product" class="carousel slide" data-ride="carousel">
+								
+								  
+
+								  <!-- Controls -->
+								  <a class="left item-control" href="#similar-product" data-slide="prev">
+									<i class="fa fa-angle-left"></i>
+								  </a>
+								  <a class="right item-control" href="#similar-product" data-slide="next">
+									<i class="fa fa-angle-right"></i>
+								  </a>
+							</div>
+							
+
+						</div>
+						<div class="col-sm-7">
+							<div class="product-information"><!--/product-information-->
+								
+								<h2>@prod.getName</h2>
+								
+								
+								<span>
+									<span>€@prod.getPrice</span>
+									
+									<a href="@routes.ShoppingCtrl.addToBasket(prod.getId)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+								</span>
+
+	
+								<div class="form-group ">
+  								<label for="sel1">Size:</label>
+								  <select class="form-control" id="sel1">
+								    <option>XS</option>
+								    <option>S</option>
+								    <option>M</option>
+								    <option>L</option>
+								    <option>XL</option>
+								    <option>XXL</option>
+								    <option>XXXL</option>
+								  </select>
+								</div>
+								<p><b>Availability:</b> In Stock</p>
+								<p><b>Condition:</b> New</p>
+								<p><b>Brand:</b> A&JS</p>
+								
+							</div><!--/product-information-->
+						</div>
+					</div><!--/product-details-->
+<!--====================== A.S. end =====================-->
+<!--====================== J.T. =====================-->
+						<!--Comment section-->
+						<div class="tab-pane fade active in" id="reviews" >
+							<div class="col-sm-12">
+								@for(c <- cList) {
+									<div class="product-information">
+									<ul>
+										<li><a href=""><i class="fa fa-user"></i>@c.getCustomer().getfName()</a></li>
+										<li><a href=""><i class="fa fa-clock-o"></i>@c.getTime()</a></li>
+										<li><a href=""><i class="fa fa-calendar-o"></i>@c.getDate()</a></li>
+									</ul>
+									<p> @c.getContent</p>
+									</div>
+								}
+								@if(user.getRole == "customer"){
+								<p><b>Write Your Review</b></p>
+
+
+
+									@form(action = routes.CustomerCtrl.comment(catId, filter, prod.getId()), 'class -> "form-horizontal", 'role -> "form") {
+									@inputText(commentForm("content"), '_label -> "Write your comment here", 'class -> "form-control")
+										<input type="submit" value="Add comment" class="btn btn-default pull-right">
+									}
+								}	
+
+							</div>
+						</div>
+						<!--End comment section-->
+<!--====================== J.T. end =====================-->
+					
+					
+				</div>
+}

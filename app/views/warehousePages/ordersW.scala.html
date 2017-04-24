@@ -1,0 +1,78 @@
+@import models.users.User
+@(user: User, order: List[models.shopping.ShopOrder])
+
+
+@warehousePages.warehouseMain("Orders", user) {
+<!--====================== J.T. =====================-->
+
+
+  <div class="row">
+      <div class="container">
+		<div class="row">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-8 padding-right">
+				<h2 class="title text-center">Orders</h2>
+				<div id="accordian">
+					<div class="list-group">
+						<!--List-->
+							 <div class="col-sm-12">
+
+            @if(flash.containsKey("success")) {
+                <div class="alert alert-success">
+                @flash.get("success")
+                </div>
+            }
+			<table class="table table-bordered table-hover table-condensed">
+				<thead>
+					<!-- The header row-->
+					<tr>
+						<th>Order date</th>
+						<th>Order status</th>
+						<th></th>
+					</tr>
+         	 </thead>
+			<tbody>
+                @for(o <- order) {
+								<tr>	
+									
+									<td><a href="@routes.WarehouseController.orderDetails(o.getId())">@o.getOrderDate</a></td>
+									<td>@o.getStatus()</td>
+									
+									<td>
+										<a href="@routes.WarehouseController.cancelOrder(o.getId())" class="btn-xs btn-danger"
+											onclick="return confirmDel();">
+											<span class="glyphicon glyphicon-trash"></span>
+										</a>	
+									</td>
+									
+									@if(o.getStatus() != "delivered"){
+									<td>
+										<a href="@routes.WarehouseController.updateStatus(o.getId())" class="btn-xs btn-danger">
+                      					<span class="glyphicon glyphicon-pencil"></span></a>
+										</a>
+									</td>
+									}
+									
+								</tr>
+                }
+
+			</tbody>
+            </div>
+			</table>
+
+					<!--end list-->
+					</div>
+				</div>
+				<div>
+				</div>
+			</div>
+  <script>
+    // JavaScript function returns true if user clicks yes, otherwise, false
+    function confirmDel() {
+        return confirm('Are you sure?');
+    }
+  </script>
+
+  <!-- End of content for main -->
+}
+

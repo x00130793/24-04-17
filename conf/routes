@@ -1,0 +1,127 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# An example controller showing a sample home page
+################################################################################
+# Main
+################################################################################
+GET     /                      	controllers.HomeController.index(cat:Long ?= 0, filter?="")
+GET	    /index			        controllers.HomeController.index(cat:Long ?= 0, filter?="")
+
+GET     /products               controllers.HomeController.products(cat:Long ?= 0, filter?="")
+
+GET     /productDetails/:id     controllers.HomeController.productDetails(cat:Long ?= 0, filter?="", id: Long)
+
+
+
+################################################################################
+# Customer
+################################################################################
+GET     /profile                        controllers.CustomerCtrl.profile(cat:Long ?= 0, filter?="")
+GET	    /profileEdit			        controllers.CustomerCtrl.profileEdit(cat:Long ?= 0, filter?="")
+GET	    /orderHistory			        controllers.CustomerCtrl.orderHistory(cat:Long ?= 0, filter?="")
+GET     /cancelOrder/:id                controllers.CustomerCtrl.cancelOrder(cat:Long ?= 0, filter?="", id: Long)
+POST        /editProfileForm/:email        controllers.LoginController.editProfileForm(email: String, cat:Long ?= 0, filter?="")			
+
+
+################################################################################
+# Shopping
+################################################################################
+GET     /showBasket                         controllers.ShoppingCtrl.showBasket(id: Long ?= 0, filter?="")
+GET     /addToBasket/:id                    controllers.ShoppingCtrl.addToBasket(id: Long, cat:Long ?= 0, filter?="")
+GET 	/removeOne			                controllers.ShoppingCtrl.removeOne(itemId: Long, cat:Long ?= 0, filter?="")
+GET     /addOne/:itemId                     controllers.ShoppingCtrl.addOne(itemId: Long, cat:Long ?= 0, filter?="")
+GET     /removeOne/:itemId                  controllers.ShoppingCtrl.removeOne(itemId: Long, cat:Long ?= 0, filter?="")
+GET     /emptyBasket                        controllers.ShoppingCtrl.emptyBasket(cat:Long ?= 0, filter?="")
+GET     /placeOrder                         controllers.ShoppingCtrl.placeOrder(cat:Long ?= 0, filter?="")
+GET     /viewOrder/:id                      controllers.ShoppingCtrl.viewOrder(id: Long, cat:Long ?= 0, filter?="")
+GET 	/payment 		                    controllers.ShoppingCtrl.payment(cat:Long ?= 0, filter?="")
+POST 	/paymentSubmit			            controllers.ShoppingCtrl.paymentSubmit(cat:Long ?= 0, filter?="")
+
+
+################################################################################
+# Admin 
+################################################################################
+# products -----------------------------------------------------
+GET     /admin/products               controllers.AdminController.products(cat:Long ?=0L)
+
+GET     /admin/addproduct                  controllers.AdminController.addProduct
+POST    /admin/addProductSubmit            controllers.AdminController.addProductSubmit
+
+GET    /admin/delProduct/:id               controllers.AdminController.deleteProduct(id: Long)
+
+GET	    /admin/updateProduct/:id        controllers.AdminController.updateProduct(id: Long)
+POST	/admin/updateProductSubmit/:id  controllers.AdminController.updateProductSubmit(id:Long)
+
+# Orders-----------------------------------------------------
+GET     /admin/orders                         controllers.AdminController.orders
+GET     /admin/cancelOrder/:id                controllers.AdminController.cancelOrder(id: Long)
+GET     /admin/updateStatus:id                controllers.AdminController.updateStatus(id: Long)
+
+# Index sliders-----------------------------------------------------
+GET     /admin/indexSliders                   controllers.AdminController.indexSliders()
+
+GET     /admin/addIndexSlider               controllers.AdminController.addIndexSlider()
+POST    /admin/addIndexSliderSubmit          controllers.AdminController.addIndexSliderSubmit()
+
+GET	    /admin/updateIndexSlider/:id        controllers.AdminController.updateIndexSlider(id: Long)
+POST	/admin/updateIndexSliderSubmit/:id  controllers.AdminController.updateIndexSliderSubmit(id:Long)
+
+GET    /admin/delIndexSlider/:id               controllers.AdminController.deleteIndexSlider(id: Long)
+
+# Display of warehouses in admins controller-----------------------------------------------------
+
+GET     /admin/warehouses1                   controllers.AdminController.warehouses1()
+
+GET     /admin/addWarehouse              controllers.AdminController.addWarehouse()
+POST    /admin/addWarehouseSubmit          controllers.AdminController.addWarehouseSubmit()
+
+GET	    /admin/updateWarehouse/:s            controllers.AdminController.updateWarehouse(s:String)
+POST	/admin/updateWarehouseSubmit/:s       controllers.AdminController.updateWarehouseSubmit(s:String)
+
+GET    /admin/delWarehouse/:s                controllers.AdminController.delWarehouse(s:String)
+
+GET    /admin/setAsMain/:s                controllers.AdminController.setAsMain(s:String)
+
+
+################################################################################
+# Login routes 
+################################################################################
+GET     /login                       controllers.LoginController.login(cat:Long ?= 0, filter?="")
+POST    /loginSubmit                 controllers.LoginController.loginSubmit(cat:Long ?= 0, filter?="")
+GET     /logout                      controllers.LoginController.logout(cat:Long ?= 0, filter?="")
+POST    /addUserSubmit               controllers.HomeController.addUserSubmit(cat:Long ?= 0, filter?="")
+
+
+################################################################################
+# Others
+################################################################################
+GET     /like:id                       controllers.HomeController.like(cat:Long ?= 0, filter?="", id: Long, s:String)
+POST    /comment:id                    controllers.CustomerCtrl.comment(cat:Long ?= 0, filter?="", id: Long)
+
+################################################################################
+# warehouses
+################################################################################
+# orders -----------------------------------------------------
+
+GET     /warehouse/ordersW                        controllers.WarehouseController.ordersW
+GET     /warehouse/orderDetails/:id               controllers.WarehouseController.orderDetails(id: Long)
+GET     /warehouse/cancelOrder/:id                controllers.WarehouseController.cancelOrder(id: Long)
+GET     /warehouse/updateStatus:id                controllers.WarehouseController.updateStatus(id: Long)
+
+# products ---------------------------------------------------
+
+GET     /warehouse/products                         controllers.WarehouseController.products(cat:Long ?=0L) 
+
+GET	    /warehouse/supplyWarehouse/:id        controllers.WarehouseController.supplyWarehouse(id: Long)
+POST	/warehouse/supplyWarehouseSubmit/:id  controllers.WarehouseController.supplyWarehouseSubmit(id:Long)
+
+#####################################################################################
+# An example controller showing how to use dependency injection
+GET     /count                       controllers.CountController.count
+# An example controller showing how to write asynchronous code
+GET     /message                     controllers.AsyncController.message
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file                controllers.Assets.versioned(path="/public", file: Asset)

@@ -1,0 +1,30 @@
+@(customer: models.users.Customer, user: models.users.User, categories: List[models.Category], editProfileForm: Form[models.users.User], catId: Long, filter: String)
+
+
+@main("Edit profile", user, categories, catId, filter)  {
+<!--====================== A.S. =====================-->
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-9 padding-right">
+				
+				
+				<h2 class="title text-center">Edit profile</h2>
+				<div id="accordian">
+					<div class="list-group">
+
+							@helper.form(action = controllers.routes.LoginController.editProfileForm(user.getEmail(), catId, filter), 'enctype -> "multipart/form-data") {
+								<div class="well">
+								@inputText(editProfileForm("fName"), 'class -> "form-control")
+								</div>
+
+								
+					</div>
+				</div>
+				<div>
+				</div>
+			</div>
+
+
+}
+}

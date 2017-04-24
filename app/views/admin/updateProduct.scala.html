@@ -1,0 +1,64 @@
+@(id: Long, updateProductForm: Form[models.Product], user: models.users.User, sizes: play.data.Form[models.Factory])
+
+@import models._
+
+
+@import helper._
+
+
+<!-- Pass page title and content {html between braces} to the main view -->
+@admin.adminMain("Update product", user) {
+<!--====================== J.T. =====================-->
+    <h3>Update Product</h3>
+    @if(flash.containsKey("success")){
+							<div class="alert alert-success">
+							@flash.get("success")
+							</div>
+						}
+						@if(flash.containsKey("fail")){
+							<div class="alert alert-danger">
+							@flash.get("fail")
+							</div>
+						}
+        <!-- Use the views.html.helpers package to create the form -->
+    @form(action = routes.AdminController.updateProductSubmit(id), 'class -> "form-horizontal", 'role->"form", 'enctype -> "multipart/form-data") {
+
+        @inputText(updateProductForm("name"), '_label -> "Name",'class -> "form-control")
+        @inputText(updateProductForm("description"), '_label -> "Description",'class -> "form-control")
+
+
+        @for((value, name) <- Category.options) {
+            <input type="checkbox" name="catSelect[]" value="@value"
+            @if(Category.inCategory(value.toLong, id)) {
+                checked
+            }
+            />@name<br>
+        }
+
+    @inputText(updateProductForm("stock"), '_label -> "Stock",'class -> "form-control")
+    @inputText(updateProductForm("price"), '_label -> "Price",'class -> "form-control")
+<!--====================== J.T. end =====================-->
+<!--====================== A.S. =====================-->
+		@inputText(sizes("strFormat1"), '_label -> "Size 1",'class -> "form-control")
+		@inputText(sizes("strFormat2"), '_label -> "Size 2",'class -> "form-control")
+		@inputText(sizes("strFormat3"), '_label -> "Size 3",'class -> "form-control")
+		@inputText(sizes("strFormat4"), '_label -> "Size 4",'class -> "form-control")
+<!--====================== A.S. end =====================-->
+<!--====================== J.T. =====================-->
+        <!-- Image upload input -->
+    <label>Image</label>
+    <input class="btn-sm btn-default" type="file" name="upload">
+
+    <br><br>
+
+        <!-- Update a submit button -->
+    <div class="actions">
+        <input href="@routes.AdminController.products(0)" type="submit" value="Update" class="btn btn-primary">
+        <a href="@routes.AdminController.products(0)"
+        <button class="btn btn-primary" role="button">Cancel</button>
+        </a>
+    </div>
+    } <!-- End Form definition -->
+
+    } <!-- End of page content -->
+<!--====================== J.T. end =====================-->

@@ -1,0 +1,131 @@
+@import models.Category
+@import models.Product
+@import models.users.User
+
+@(env: play.api.Environment, categories: List[models.Category], products: List[models.Product], user: models.users.User, catId: Long, filter: String, iList: List[IndexSlider], activeI: IndexSlider)
+
+<!-- Pass page title, user, and content {html between braces} to the main view -->
+@main("Home", user, categories, catId: Long, filter) {
+<!--====================== J.T. =====================-->
+	
+	@if(activeI != null){
+	<section id="slider"><!--slider-->
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-9">
+					<div id="slider-carousel" class="carousel slide" data-ride="carousel">
+						
+
+						<!--Slider-->
+						<div class="carousel-inner">
+							<div class="item active">
+								<div class="col-sm-6">
+									<h1><span>@activeI.getHeading</span></h1>
+									<h2>@activeI.getHeading2</h2>
+									<p>@activeI.getContent</p>
+									<a href="@(activeI.getPostLink)" <button type="button" class="btn btn-default">More</button></a>
+
+								</div>
+								<div class="col-sm-6">
+									<img src="/assets/images/slider/@(activeI.getId).jpg" class="girl img-responsive" alt="" />
+
+							</div>
+							</div>
+
+							@for(i <- iList){
+							
+								<div class="pushDown item">
+									<div class="col-sm-6">
+										<h1><span>@activeI.getHeading</span></h1>
+										<h2>@i.getHeading2</h2>
+										<p>@i.getContent</p>
+										<a href="@(i.getPostLink)" <button type="button" class="btn btn-default">More</button></a>
+									</div>
+									<div class="col-sm-6">
+										<img src="/assets/images/slider/@(i.getId).jpg" class="girl img-responsive" alt="" />
+										
+										<!--<img src="/assets/images/home/new.png"  class="pricing" alt="" />-->
+									</div>
+								</div>
+							}
+
+						</div>
+
+						<a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+							<i class="fa fa-angle-left"></i>
+						</a>
+						<a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+							<i class="fa fa-angle-right"></i>
+						</a>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section><!--/slider-->
+	}
+<!--====================== J.T. end =====================-->
+<!--====================== J.T. =====================-->
+	<div class="col-sm-12 padding-right">
+		<div class="row">
+		@if(flash.containsKey("success")){
+							<div class="alert alert-success">
+							@flash.get("success")
+							</div>
+						}
+						@if(flash.containsKey("fail")){
+							<div class="alert alert-danger">
+							@flash.get("fail")
+							</div>
+						}
+            <div class="features_items"><!--features_items-->
+                <h2 class="title text-center">New products</h2>
+                @for(p <- products) {
+                    <div  class="col-sm-4">
+                        <div  class="product-image-wrapper">
+                            <div class="single-products">
+                                <div class="productinfo text-center">
+                                    @if(env.resource("public/images/productImages/thumbnails/" + p.getId + ".jpg").isDefined) {
+                                        <img src="/assets/images/productImages/@(p.getId).jpg"/>
+                                    } else {
+                                        <img src="/assets/images/productImages/thumbnails/noImage.png"/>
+                                    }
+
+                                <h2>&euro; @("%.2f".format(p.getPrice))</h2>
+                                <h3>@p.getName</h3>
+                               
+                              
+                                </div>
+                                <div class="product-overlay">
+                                    <div class="overlay-content">
+                                        <h2>&euro; @("%.2f".format(p.getPrice))</h2>
+                                        <a   href="@routes.HomeController.productDetails(catId, filter, p.getId)" <p> @p.getDescription</p> </a>
+										@if(user.getRole == "customer"){
+                                        <a href="@routes.ShoppingCtrl.addToBasket(p.getId)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+										}
+									</div>
+                                </div>
+                            </div>
+							
+                            <div class="choose">
+								
+								<ul class="nav nav-pills nav-justified">
+									@if(user.getRole == "customer"){
+                                    <li><a href="@routes.HomeController.like(catId, filter, p.getId, "index")"><b><i class="glyphicon glyphicon-thumbs-up"></i>Like @p.getPlike().getLikeCount() </a></b></li>
+                                    <li><a href="#"><b><i class="fa fa-plus-square"></i>Add to wishlist</a></b></li>  
+									}
+                                </ul>
+								
+                            </div>
+							
+                        </div>
+                    </div>
+                }
+<!--====================== J.T. end=====================-->				
+		</div>
+		</div>
+					
+					
+					
+				</div>
+}

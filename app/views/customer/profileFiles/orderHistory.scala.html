@@ -1,0 +1,84 @@
+@(customer: models.users.Customer, user: models.users.User, categories: List[models.Category], catId: Long, ord: List[models.shopping.ShopOrder], filter: String)
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+@main("Customer order history", user, categories, catId, filter)  {
+<!--====================== J.T. =====================-->
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-9 padding-right">
+				<h2 class="title text-center">Order history</h2>
+				
+
+				<div id="accordian">
+					<div class="list-group">
+						<!--List-->
+							 <div class="col-sm-12">
+				<p>You can still cancel order while it is in warehouse. Once the product status is changed to delivered 
+					order cannot be cancelled.
+				</p>				 
+            @if(flash.containsKey("success")){
+							<div class="alert alert-success">
+							@flash.get("success")
+							</div>
+						}
+						@if(flash.containsKey("fail")){
+							<div class="alert alert-danger">
+							@flash.get("fail")
+							</div>
+						}
+			<table class="table table-bordered table-hover table-condensed">
+				<thead>
+					<!-- The header row-->
+					<tr>
+						<th>Order date</th>
+						<th>Total Cost</th>
+						<th>Order status</th>
+						<th>Cancel</th>
+					</tr>
+         	 </thead>
+			<tbody>
+                @for(o <- ord) {
+			
+								<tr>	
+								
+									<td>@o.getOrderDate</td>
+									<td>€@o.getOrderTotal</td>
+									@if(o.getStatus() != "delivered"){
+										<td>@o.getStatus()</td>
+									} else {
+										<td>@o.getStatus() (@o.getDeliveryDate())</td>
+									}
+									
+									<td>
+										@if(o.getStatus() != "delivered"){
+										<a href="@routes.CustomerCtrl.cancelOrder(catId, filter, o.getId)" class="btn-xs btn-danger"
+											onclick="return confirmDel();">
+											<span class="glyphicon glyphicon-trash"></span>
+										</a>
+										} else {
+											N/A
+										}
+									</td>
+										
+									</td>
+									</a>
+								</tr>
+                }
+
+			</tbody>
+            </div>
+			</table>
+
+					<!--end list-->
+					</div>
+				</div>
+				<div>
+				</div>
+			</div>
+
+
+}
+

@@ -27,11 +27,10 @@ class profileEdit extends BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable
   def apply/*1.2*/(customer: models.users.Customer, user: models.users.User, categories: List[models.Category], editProfileForm: Form[models.users.User], catId: Long, filter: String):play.twirl.api.HtmlFormat.Appendable = {
     _display_ {
       {
-
+import helper._
 
 Seq[Any](format.raw/*1.166*/("""
-
-
+"""),format.raw/*3.1*/("""
 """),_display_(/*4.2*/main("Edit profile", user, categories, catId, filter)/*4.55*/  {_display_(Seq[Any](format.raw/*4.58*/("""
 """),format.raw/*5.1*/("""<!--====================== A.S. =====================-->
 
@@ -45,20 +44,21 @@ Seq[Any](format.raw/*1.166*/("""
 					<div class="list-group">
 
 							"""),_display_(/*16.9*/helper/*16.15*/.form(action = controllers.routes.LoginController.editProfileForm(user.getEmail(), catId, filter), 'enctype -> "multipart/form-data")/*16.148*/ {_display_(Seq[Any](format.raw/*16.150*/("""
-								"""),format.raw/*17.9*/("""<div class="well">
-								"""),_display_(/*18.10*/inputText(editProfileForm("fName"), 'class -> "form-control")),format.raw/*18.71*/("""
-								"""),format.raw/*19.9*/("""</div>
-
 								
-					</div>
+								"""),format.raw/*18.9*/("""<div class="well">
+								"""),_display_(/*19.10*/inputText(editProfileForm("fName"), 'class -> "form-control")),format.raw/*19.71*/("""
+								"""),format.raw/*20.9*/("""</div>
+							""")))}),format.raw/*21.9*/("""
+								
+					"""),format.raw/*23.6*/("""</div>
 				</div>
 				<div>
 				</div>
 			</div>
 
 
-""")))}),format.raw/*29.2*/("""
-""")))}),format.raw/*30.2*/("""
+
+""")))}),format.raw/*31.2*/("""
 """))
       }
     }
@@ -79,11 +79,11 @@ Seq[Any](format.raw/*1.166*/("""
 object profileEdit extends profileEdit_Scope0.profileEdit
               /*
                   -- GENERATED --
-                  DATE: Mon Apr 24 12:57:06 IST 2017
-                  SOURCE: /home/wdd/Desktop/project2/project2017/app/views/customer/profileFiles/profileEdit.scala.html
-                  HASH: a5da78109040ddf1daf0cf7decaf2e59c3a698f5
-                  MATRIX: 870->1|1130->165|1159->169|1220->222|1260->225|1287->226|1582->495|1597->501|1740->634|1781->636|1817->645|1872->673|1954->734|1990->743|2094->817|2126->819
-                  LINES: 27->1|32->1|35->4|35->4|35->4|36->5|47->16|47->16|47->16|47->16|48->17|49->18|49->18|50->19|60->29|61->30
+                  DATE: Mon Apr 24 13:58:52 IST 2017
+                  SOURCE: /home/wdd/Desktop/project/24-04-17/app/views/customer/profileFiles/profileEdit.scala.html
+                  HASH: 241a3b3a01abd86a486695273d623d76c7b7ea53
+                  MATRIX: 870->1|1145->165|1172->183|1199->185|1260->238|1300->241|1327->242|1622->511|1637->517|1780->650|1821->652|1866->670|1921->698|2003->759|2039->768|2084->783|2126->798|2209->851
+                  LINES: 27->1|32->1|33->3|34->4|34->4|34->4|35->5|46->16|46->16|46->16|46->16|48->18|49->19|49->19|50->20|51->21|53->23|61->31
                   -- GENERATED --
               */
           

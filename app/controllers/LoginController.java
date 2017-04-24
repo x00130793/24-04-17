@@ -103,7 +103,7 @@ public class LoginController extends Controller {
         
 
         Form<User> newProfileForm = formFactory.form(User.class).bindFromRequest();
-        User u = new User();
+        User u = newProfileForm.get();
         try {
             u = newProfileForm.get();
         } catch (Exception e) {

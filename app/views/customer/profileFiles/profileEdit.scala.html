@@ -1,5 +1,5 @@
 @(customer: models.users.Customer, user: models.users.User, categories: List[models.Category], editProfileForm: Form[models.users.User], catId: Long, filter: String)
-
+@import helper._
 
 @main("Edit profile", user, categories, catId, filter)  {
 <!--====================== A.S. =====================-->
@@ -14,10 +14,11 @@
 					<div class="list-group">
 
 							@helper.form(action = controllers.routes.LoginController.editProfileForm(user.getEmail(), catId, filter), 'enctype -> "multipart/form-data") {
+								
 								<div class="well">
 								@inputText(editProfileForm("fName"), 'class -> "form-control")
 								</div>
-
+							}
 								
 					</div>
 				</div>
@@ -26,5 +27,5 @@
 			</div>
 
 
-}
+
 }

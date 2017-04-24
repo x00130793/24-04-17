@@ -21,7 +21,8 @@ GET     /productDetails/:id     controllers.HomeController.productDetails(cat:Lo
 GET     /profile                        controllers.CustomerCtrl.profile(cat:Long ?= 0, filter?="")
 GET	    /profileEdit			        controllers.CustomerCtrl.profileEdit(cat:Long ?= 0, filter?="")
 GET	    /orderHistory			        controllers.CustomerCtrl.orderHistory(cat:Long ?= 0, filter?="")
-GET     /cancelOrder/:id                controllers.CustomerCtrl.cancelOrder(cat:Long ?= 0, filter?="", id: Long)			
+GET     /cancelOrder/:id                controllers.CustomerCtrl.cancelOrder(cat:Long ?= 0, filter?="", id: Long)
+POST        /editProfileForm/:email        controllers.LoginController.editProfileForm(email: String, cat:Long ?= 0, filter?="")			
 
 
 ################################################################################

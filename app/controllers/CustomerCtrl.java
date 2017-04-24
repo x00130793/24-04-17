@@ -61,7 +61,7 @@ public class CustomerCtrl extends Controller {
             editProfileForm = editProfileForm.fill(User.find.where().eq("EMAIL", getUserFromSession().getEmail()).findUnique());
         }
 
-        return ok(profileEdit.render(getCurrentCustomer(), User.getUserById(session().get("email")), categoriesList, cat, filter));
+        return ok(profileEdit.render(getCurrentCustomer(), User.getUserById(session().get("email")), categoriesList,editProfileForm, cat, filter));
     }
 
 	
